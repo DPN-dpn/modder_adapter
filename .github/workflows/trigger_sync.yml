@@ -1,0 +1,18 @@
+name: Trigger Private Sync
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치에 코드가 푸시될 때만 실행
+
+jobs:
+  notify-private:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send dispatch event to private repo
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          # GitHub 환경설정에서 발급받을 개인 토큰(PAT)을 시크릿으로 저장하여 사용합니다
+          token: ${{ secrets.PAT_FOR_SYNC }}
+          repository: DPN-dpn/modder_adapter-private
+          event-type: sync-from-public
