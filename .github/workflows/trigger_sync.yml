@@ -8,6 +8,7 @@ on:
 jobs:
   notify-private:
     runs-on: ubuntu-latest
+    if: github.repository == 'DPN-dpn/modder_adapter'
     steps:
       - name: Send dispatch event to private repo
         uses: peter-evans/repository-dispatch@v3
