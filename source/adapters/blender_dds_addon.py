@@ -34,9 +34,8 @@ def _apply_dds_adapter():
             
             if getattr(bpy.context.window_manager, "mdad_dds_create_material", False) and tex:
                 mat_name = os.path.basename(file).split(".")[0]
-                mat = bpy.data.materials.get(mat_name)
-                if not mat:
-                    mat = bpy.data.materials.new(name=mat_name)
+                # 기존 머터리얼 재사용 없이 항상 새로 생성 (이름 중복 시 블렌더가 자동으로 .001 등을 붙여줌)
+                mat = bpy.data.materials.new(name=mat_name)
                 
                 mat.use_nodes = True
                 
